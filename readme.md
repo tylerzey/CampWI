@@ -29,3 +29,10 @@
 
 - Add a navbar to all templates
 - Style the new campground form
+
+# Show Page
+
+- Review the RESTful routes we've seen thus far
+- Add description to our campground model
+- Show db.collection.drop()
+- Add a show route/template
