@@ -3,22 +3,6 @@ const express = require("express"),
   bodyParser = require("body-parser"),
   mongoose = require("mongoose");
 
-// let campgrounds = [
-//   {
-//     name: "Salmon Creek",
-//     image: "https://images.pexels.com/photos/2398220/pexels-photo-2398220.jpeg?auto=compress&cs=tinysrgb&h=350",
-//   },
-//   {
-//     name: "Newport State Park",
-//     image:
-//       "https://img-aws.ehowcdn.com/700x/cdn.onlyinyourstate.com/wp-content/uploads/2017/10/swirling-stars-above-lake-michigan-700x465.jpg",
-//   },
-//   {
-//     name: "Mountain Goat's Rest",
-//     image: "https://pixabay.com/get/53e3d5414851aa14f1dc84609620367d1c3ed9e04e507440702d78d59745c6_340.jpg",
-//   },
-// ];
-
 // Connect (or create new DB) for mongoose to interact with MongoDB
 mongoose
   .connect("mongodb://localhost:27017/camp_wi", {
@@ -38,6 +22,7 @@ app.set("view engine", "ejs");
 const campgroundSchema = new mongoose.Schema({
   name: String,
   image: String,
+  description: String,
 });
 // Make the object model of this
 const Campground = mongoose.model("Campground", campgroundSchema);
@@ -48,6 +33,8 @@ const Campground = mongoose.model("Campground", campgroundSchema);
 //     name: "Newport State Park",
 //     image:
 //       "https://img-aws.ehowcdn.com/700x/cdn.onlyinyourstate.com/wp-content/uploads/2017/10/swirling-stars-above-lake-michigan-700x465.jpg",
+//     description:
+//       "Newport is Wisconsin's only wilderness-designated state park. In 2017, the International Dark-Sky Association named Newport a Dark-sky preserve.",
 //   },
 //   (err, campground) => {
 //     if (err) {
@@ -64,24 +51,25 @@ app.get("/", (req, res) => {
   res.render("landing");
 });
 
-// Campgrounds route
+// INDEX - show all campgrounds
 app.get("/campgrounds", (req, res) => {
   // Get all campgrounds from DB
   Campground.find({}, (err, allCampgrounds) => {
     if (err) {
       console.log(err);
     } else {
-      res.render("campgrounds", { campgrounds: allCampgrounds });
+      res.render("index", { campgrounds: allCampgrounds });
     }
   });
 });
 
-// Allow new campgrounds to be added in
+// CREATE - add new campground to DB
 app.post("/campgrounds", (req, res) => {
   // get data from form and add to campgrounds array
   let name = req.body.name;
   let img = req.body.image;
-  let newCampground = { name: name, image: img };
+  let desc = req.body.description;
+  let newCampground = { name: name, image: img, description: desc };
   // Create a new campground and save to DB
   Campground.create(newCampground, (err, newlyCreated) => {
     if (err) {
@@ -93,9 +81,23 @@ app.post("/campgrounds", (req, res) => {
   });
 });
 
-// the route to display the form TO THEN post
+// NEW - show form to create new campground
 app.get("/campgrounds/new", (req, res) => {
   res.render("new");
+});
+
+// SHOW - shows additional info about one campground
+//  this must be after '/campgrounds/new' otherwise it would treat 'new' as :id
+app.get("/campgrounds/:id", (req, res) => {
+  // find the campground with provided ID
+  Campground.findById(req.params.id, (err, foundCampground) => {
+    if (err) {
+      console.log(err);
+    } else {
+      // render show template with the campground
+      res.render("show", { campground: foundCampground });
+    }
+  });
 });
 
 // Start server
