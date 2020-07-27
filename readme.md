@@ -1,59 +1,59 @@
-### CampWI Site/WebApp
+# CampWI Site/WebApp
 
 - Add Landing Page
 - Add Campgrounds Page that lists all campgrounds
 
-# Each campground has:
+## Each campground has:
 
 - Name
 - Image
 
-# Layout & Basic Styling
+## Layout & Basic Styling
 
 - Create our header and footer partials
 - Add in Bootstrap (and some simple, prelim styles)
 
-# Creating New Campgrounds
+## Creating New Campgrounds
 
 - Setup new campground POST route
 - Add in body-parser
 - Setup route to show form
 - Add basic unstyled form
 
-# Style the campgrounds page
+## Style the campgrounds page
 
 - Add a better header/title
 - Make campgrounds display in a grid
 
-# Style the Navbar and Form
+## Style the Navbar and Form
 
 - Add a navbar to all templates
 - Style the new campground form
 
-# Show Page
+## Show Page
 
 - Review the RESTful routes we've seen thus far
 - Add description to our campground model
 - Show db.collection.drop()
 - Add a show route/template
 
-# Refactor Mongoose Code
+## Refactor Mongoose Code
 
 - Create a "models" directory
 - Use module.export
 - Require everything correctly!
 
-# Add DB Seeds File
+## Add DB Seeds File
 
 - Add a seeds.js file
 - Run the seeds file every time the server starts
 
-# Add the Comment Model
+## Add the Comment Model
 
 - Remedy errors created from adding in Seeds file before all models
 - Display comments on campground show page
 
-# Comment New/Create
+## Comment New/Create
 
 - Discuss nested routes
 - Add the comment new and create routes
