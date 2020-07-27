@@ -69,7 +69,6 @@ async function seedDB() {
       });
       // console.log("Comment created.");
       campground.comments.push(comment1);
-      campground.save();
       // console.log("Comment added to campground.");
 
       let comment2 = await Comment.create({
@@ -78,6 +77,8 @@ async function seedDB() {
       });
       // console.log("Comment created.");
       campground.comments.push(comment2);
+
+      // Finally save each campground with its 2 default comments
       campground.save();
       // console.log("Comment added to campground.");
     }

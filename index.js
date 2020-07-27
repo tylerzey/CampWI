@@ -23,6 +23,8 @@ mongoose
 app.use(bodyParser.urlencoded({ extended: true }));
 // set default view files to be ".ejs"
 app.set("view engine", "ejs");
+// serve the "public" folder which contains our custom CSS
+app.use(express.static(__dirname + "/public"));
 // Seed the database AFTER app configuration
 seedDB();
 

@@ -1,0 +1,19 @@
+body {
+  font-family: Poppins, sans-serif;
+}
+
+.thumbnail img {
+  width: 100%;
+}
+
+.thumbnail {
+  padding: 0;
+}
+
+.col-lg-12 h3 {
+  font-family: Bebas Neue, sans-serif;
+}
+
+.thumbnail .caption h4 {
+  font-family: Bebas Neue, sans-serif;
+}
