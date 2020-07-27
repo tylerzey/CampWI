@@ -1,7 +1,13 @@
+const campground = require("./models/campground");
+
 const express = require("express"),
   app = express(),
+  seedDB = require("./seeds"),
   bodyParser = require("body-parser"),
-  mongoose = require("mongoose");
+  mongoose = require("mongoose"),
+  // SCHEMA SET-UP: Set up base/default data schema
+  Campground = require("./models/campground"),
+  Comment = require("./models/comment");
 
 // Connect (or create new DB) for mongoose to interact with MongoDB
 mongoose
@@ -17,34 +23,10 @@ mongoose
 app.use(bodyParser.urlencoded({ extended: true }));
 // set default view files to be ".ejs"
 app.set("view engine", "ejs");
+// Seed the database AFTER app configuration
+seedDB();
 
-// SCHEMA SET-UP: Set up base/default data schema
-const campgroundSchema = new mongoose.Schema({
-  name: String,
-  image: String,
-  description: String,
-});
-// Make the object model of this
-const Campground = mongoose.model("Campground", campgroundSchema);
-
-// Create a campground
-// Campground.create(
-//   {
-//     name: "Newport State Park",
-//     image:
-//       "https://img-aws.ehowcdn.com/700x/cdn.onlyinyourstate.com/wp-content/uploads/2017/10/swirling-stars-above-lake-michigan-700x465.jpg",
-//     description:
-//       "Newport is Wisconsin's only wilderness-designated state park. In 2017, the International Dark-Sky Association named Newport a Dark-sky preserve.",
-//   },
-//   (err, campground) => {
-//     if (err) {
-//       console.log(err);
-//     } else {
-//       console.log("Newly create campground!");
-//       console.log(campground);
-//     }
-//   }
-// );
+// SETTING UP ROUTES
 
 // Route path
 app.get("/", (req, res) => {
@@ -58,7 +40,7 @@ app.get("/campgrounds", (req, res) => {
     if (err) {
       console.log(err);
     } else {
-      res.render("index", { campgrounds: allCampgrounds });
+      res.render("./campgrounds/index", { campgrounds: allCampgrounds });
     }
   });
 });
@@ -83,19 +65,62 @@ app.post("/campgrounds", (req, res) => {
 
 // NEW - show form to create new campground
 app.get("/campgrounds/new", (req, res) => {
-  res.render("new");
+  res.render("./campgrounds/new");
 });
 
 // SHOW - shows additional info about one campground
-//  this must be after '/campgrounds/new' otherwise it would treat 'new' as :id
+//  this must be after '/campgrounds/new' otherwise it would treat /'campgrounds'/'new' as :id
 app.get("/campgrounds/:id", (req, res) => {
   // find the campground with provided ID
-  Campground.findById(req.params.id, (err, foundCampground) => {
+  Campground.findById(req.params.id)
+    .populate("comments")
+    .exec((err, foundCampground) => {
+      if (err) {
+        console.log(err);
+      } else {
+        // render show template with the campground
+        res.render("./campgrounds/show", { campground: foundCampground });
+      }
+    });
+});
+
+//=================
+// COMMENTS ROUTES
+//=================
+
+// INDEX - Comments
+app.get("/campgrounds/:id/comments/new", (req, res) => {
+  // Find campground by id
+  Campground.findById(req.params.id, (err, campground) => {
     if (err) {
       console.log(err);
     } else {
-      // render show template with the campground
-      res.render("show", { campground: foundCampground });
+      // pass through campground data object
+      res.render("./comments/new", { campground: campground });
+    }
+  });
+});
+
+// CREATE - Comments
+app.post("/campgrounds/:id/comments", (req, res) => {
+  // Lookup campground using ID
+  Campground.findById(req.params.id, (err, campground) => {
+    if (err) {
+      console.log(err);
+      res.redirect("/campgrounds"); // eventually change to show a true comment
+    } else {
+      // create new comment
+      Comment.create(req.body.comment, (err, comment) => {
+        if (err) {
+          console.log(err);
+        } else {
+          // connect new comment to campground
+          campground.comments.push(comment);
+          campground.save();
+          // redirect TO CAMPGROUND SHOW PAGE
+          res.redirect("/campgrounds/" + campground._id);
+        }
+      });
     }
   });
 });

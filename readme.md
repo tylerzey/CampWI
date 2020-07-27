@@ -1,4 +1,4 @@
-# Yelp Camp
+### CampWI Site/WebApp
 
 - Add Landing Page
 - Add Campgrounds Page that lists all campgrounds
@@ -36,3 +36,25 @@
 - Add description to our campground model
 - Show db.collection.drop()
 - Add a show route/template
+
+# Refactor Mongoose Code
+
+- Create a "models" directory
+- Use module.export
+- Require everything correctly!
+
+# Add DB Seeds File
+
+- Add a seeds.js file
+- Run the seeds file every time the server starts
+
+# Add the Comment Model
+
+- Remedy errors created from adding in Seeds file before all models
+- Display comments on campground show page
+
+# Comment New/Create
+
+- Discuss nested routes
+- Add the comment new and create routes
+- Add the new comment form
