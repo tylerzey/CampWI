@@ -48,6 +48,12 @@ const seeds = [
     description:
       "Bicycle rights food truck VHS art party before they sold out ethical scenester put a bird on it keytar ugh subway tile. Hexagon hoodie VHS, viral mixtape chartreuse wolf snackwave poutine photo booth typewriter next level ramps shaman. Roof party woke plaid, hoodie umami vape direct trade selvage poutine twee austin truffaut celiac typewriter cronut. Live-edge tote bag man bun asymmetrical wayfarers stumptown meggings 3 wolf moon synth chillwave green juice banh mi you probably haven't heard of them flexitarian organic. Snackwave craft beer chillwave fashion axe, salvia retro vaporware hot chicken tbh XOXO actually letterpress. Umami sriracha literally four dollar toast.",
   },
+  {
+    name: "Cave Point County Park",
+    image: "https://envirohistory.uwgb.org/images/f/ff/Scenic_View.jpg",
+    description:
+      "Tbh stumptown ramps cray, umami brooklyn poutine enamel pin bespoke squid. Plaid craft beer cronut, wayfarers pinterest kale chips tote bag messenger bag kinfolk church-key food truck. Taiyaki butcher tbh af bespoke selfies church-key raw denim viral chartreuse hella truffaut DIY beard artisan. Forage leggings raclette try-hard.",
+  },
 ];
 
 // Re-factored this code compared to block commented out below
