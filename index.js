@@ -1,13 +1,13 @@
-const campground = require("./models/campground");
-
-const express = require("express"),
-  app = express(),
-  seedDB = require("./seeds"),
+const LocalStrategy = require("passport-local"),
+  Campground = require("./models/campground"), // SCHEMA SET-UP: Set up base/default data schema
   bodyParser = require("body-parser"),
   mongoose = require("mongoose"),
-  // SCHEMA SET-UP: Set up base/default data schema
-  Campground = require("./models/campground"),
-  Comment = require("./models/comment");
+  passport = require("passport"),
+  Comment = require("./models/comment"), // SCHEMA SET-UP: Set up base/default data schema
+  express = require("express"),
+  seedDB = require("./seeds"),
+  User = require("./models/user"),
+  app = express();
 
 // Connect (or create new DB) for mongoose to interact with MongoDB
 mongoose
@@ -28,6 +28,29 @@ app.use(express.static(__dirname + "/public"));
 // Seed the database AFTER app configuration
 seedDB();
 
+// PASSPORT CONFIGURATION
+app.use(
+  require("express-session")({
+    // "Express-session" must be initialized BEFORE any other Passport inits
+    secret: "Rum is the most varied and complex spirit in the world.",
+    resave: false,
+    saveUninitialized: false,
+  })
+);
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+passport.use(new LocalStrategy(User.authenticate())); // a method 'tacked-on' to our User model from "UserSchema.plugin(passportLocalMongoose);"
+
+passport.serializeUser(User.serializeUser()); // another method 'tacked-on' from "passportLocalMongoose"
+passport.deserializeUser(User.deserializeUser()); // another method 'tacked-on' from "passportLocalMongoose"
+
+app.use((req, res, next) => {
+  res.locals.currentUser = req.user; // makes "currentUser" available & defined for each template
+  next();
+});
+
 // SETTING UP ROUTES
 
 // Route path
@@ -42,7 +65,7 @@ app.get("/campgrounds", (req, res) => {
     if (err) {
       console.log(err);
     } else {
-      res.render("./campgrounds/index", { campgrounds: allCampgrounds });
+      res.render("./campgrounds/index", { campgrounds: allCampgrounds, currentUser: req.user });
     }
   });
 });
@@ -91,7 +114,7 @@ app.get("/campgrounds/:id", (req, res) => {
 //=================
 
 // INDEX - Comments
-app.get("/campgrounds/:id/comments/new", (req, res) => {
+app.get("/campgrounds/:id/comments/new", isLoggedIn, (req, res) => {
   // Find campground by id
   Campground.findById(req.params.id, (err, campground) => {
     if (err) {
@@ -104,7 +127,7 @@ app.get("/campgrounds/:id/comments/new", (req, res) => {
 });
 
 // CREATE - Comments
-app.post("/campgrounds/:id/comments", (req, res) => {
+app.post("/campgrounds/:id/comments", isLoggedIn, (req, res) => {
   // Lookup campground using ID
   Campground.findById(req.params.id, (err, campground) => {
     if (err) {
@@ -126,6 +149,58 @@ app.post("/campgrounds/:id/comments", (req, res) => {
     }
   });
 });
+
+//=================
+// AUTH ROUTES
+//=================
+
+// Show register form
+app.get("/register", (req, res) => {
+  res.render("register");
+});
+
+// Handle sign up logic
+app.post("/register", (req, res) => {
+  let newUser = new User({ username: req.body.username });
+  User.register(newUser, req.body.password, (err, user) => {
+    if (err) {
+      console.log(err);
+      return res.render("register"); // if error, exit registration and re-display the register template
+    }
+    passport.authenticate("local")(req, res, () => {
+      res.redirect("/campgrounds");
+    });
+  });
+});
+
+// Show login form
+app.get("/login", (req, res) => {
+  res.render("login");
+});
+
+// Handling Login logic
+app.post(
+  "/login",
+  passport.authenticate("local", {
+    successRedirect: "/campgrounds",
+    failureRedirect: "/login",
+  }),
+  (req, res) => {}
+);
+
+// LOGOUT Route
+app.get("/logout", (req, res) => {
+  req.logout();
+  res.redirect("/campgrounds");
+});
+
+// Middleware function for logged-in
+function isLoggedIn(req, res, next) {
+  if (req.isAuthenticated()) {
+    return next();
+  }
+  res.redirect("/login");
+}
 
 // Start server
 app.listen(1000, function () {

@@ -63,3 +63,30 @@
 
 - Add sidebar to show page
 - Display comments nicely
+
+## Auth Pt. 1 - Add User Model
+
+- Install all packages needed for Auth
+- Define User model
+
+## Auth Pt. 2 - Register
+
+- Configure Passport
+- Add register routes
+- Add register template
+
+## Auth Pt. 3 - Login
+
+- Add Login routes
+- Add Login template
+
+## Auth Pt. 4 - Logout/Navbar utilities
+
+- Add Logout routes
+- Prevent user from adding a comment if not signed in
+- Add links to navbar
+- Show/hide auth links correctly
+
+## Auth Pt. 5 - Show/Hide Links
+
+- Show/hide auth links in navbar based on loggedIn status
