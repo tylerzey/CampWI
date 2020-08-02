@@ -17,3 +17,53 @@ body {
 .thumbnail .caption h4 {
   font-family: Bebas Neue, sans-serif;
 }
+
+#delete-form {
+  display: inline;
+}
+
+.delete-comment-form {
+  display: inline;
+}
+
+div.comment-edit-delete-btns a {
+  opacity: 0;
+}
+
+div.comment-edit-delete-btns a:hover {
+  opacity: 1;
+  transition: 0.3s linear;
+  -webkit-transition: 0.3s linear;
+  -moz-transition: 0.3s linear;
+  -ms-transition: 0.3s linear;
+  -o-transition: 0.3s linear;
+}
+
+div.comment-edit-delete-btns .delete-comment-form button {
+  opacity: 0;
+}
+
+div.comment-edit-delete-btns .delete-comment-form button:hover {
+  opacity: 1;
+  transition: 0.3s linear;
+  -webkit-transition: 0.3s linear;
+  -moz-transition: 0.3s linear;
+  -ms-transition: 0.3s linear;
+  -o-transition: 0.3s linear;
+}
+
+div.col-md-9 div.thumbnail div.caption h4.pull-right + h4 {
+  color: #337ab7;
+}
+
+.lead {
+  margin-bottom: 10px;
+}
+
+div.panel-body {
+  padding: 0 10px;
+}
+
+div.list-group {
+  margin-bottom: 10px;
+}

@@ -90,3 +90,54 @@
 ## Auth Pt. 5 - Show/Hide Links
 
 - Show/hide auth links in navbar based on loggedIn status
+
+# REFACTORING the ROUTES
+
+- Use Express router to reorganize all routes
+
+## Users + Comments Association
+
+- Associate users and comments
+- Save author's name to a comment automatically
+
+## Users + Campgrounds
+
+- Prevent an unauthenticated user from creating a campground
+- Save username + id of user who created campground to the new created campground
+
+## Editing Campgrounds
+
+- Add Method-Override
+- Add Edit Route for Campgrounds
+- Add Link to Edit page
+- Add Update Route
+- Fix \$set problem
+
+## Deleting Campgrounds
+
+- Add Destroy Route
+- Add Delete button
+
+## Authorization (or Permissions) Part 1: Campgrounds
+
+- User can only edit their own/submitted campgrounds
+- User can only delete their own/submitted campgrounds
+- Hide/Show edit and delete buttons based on Authorization
+
+## Editing Comments
+
+- Add Edit route for comments
+- Add Edit button
+- Add Update button
+
+## Deleting Comments
+
+- Add Destroy route
+- Add Delete button
+
+## Authorization Part 2: Comments
+
+- User can only edit their own comments
+- User can only delete their own comments
+- Hide/Show edit and delete buttons
+- Refactor Middleware
