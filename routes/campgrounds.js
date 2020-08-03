@@ -34,9 +34,11 @@ router.post("/", middleware.isLoggedIn, (req, res) => {
   // Create a new campground and save to DB
   Campground.create(newCampground, (err, newlyCreated) => {
     if (err) {
+      req.flash("error", "Uhrmmm, we could not find that campground.");
       console.log(err);
     } else {
       // Redirect back to campgrounds page
+      req.flash("success", "Successfully created your campground!");
       res.redirect("/campgrounds");
     }
   });
@@ -54,7 +56,9 @@ router.get("/:id", (req, res) => {
   Campground.findById(req.params.id)
     .populate("comments")
     .exec((err, foundCampground) => {
-      if (err) {
+      if (err || !foundCampground) {
+        req.flash("error", "Well this is embarrassing, we failed to find some items... :/");
+        res.redirect("back");
         console.log(err);
       } else {
         // render show template with the campground
@@ -67,7 +71,7 @@ router.get("/:id", (req, res) => {
 router.get("/:id/edit", middleware.checkCampgroundOwnership, (req, res) => {
   Campground.findById(req.params.id, (err, foundCampground) => {
     if (err) {
-      req.flash("error", "Uhrmmm, we could not find that campground.");
+      req.flash("error", "Uhrmmm, we could not find that campground... :/");
       return res.redirect("/campgrounds/" + req.params.id);
     }
     res.render("campgrounds/edit", { campground: foundCampground });
@@ -79,6 +83,7 @@ router.put("/:id", middleware.checkCampgroundOwnership, (req, res) => {
   // Find and update the correct campground
   Campground.findOneAndUpdate({ _id: req.params.id }, req.body.campground, (err, updatedCampground) => {
     if (err) {
+      req.flash("error", "Uhrmmm, we could not find that campground.");
       res.redirect("back");
     } else {
       // Redirect somewhere -- typically to the SHOW page of that campground
