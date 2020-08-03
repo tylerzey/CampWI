@@ -9,6 +9,8 @@ middlewareObj.isLoggedIn = (req, res, next) => {
   if (req.isAuthenticated()) {
     return next();
   }
+  req.flash("error", "You need to be logged in to submit."); // won't display until the next page we see
+  // Need to declare this before a redirect
   res.redirect("/login");
 };
 
@@ -19,6 +21,7 @@ middlewareObj.checkCampgroundOwnership = (req, res, next) => {
     Campground.findById(req.params.id, (err, foundCampground) => {
       if (err) {
         // check error
+        req.flash("error", "Well, this is awkward. We cannot find that campground. :/");
         res.redirect("back");
       } else {
         // is user the creator of this campground?
@@ -26,12 +29,14 @@ middlewareObj.checkCampgroundOwnership = (req, res, next) => {
           next();
         } else {
           // if not, redirect
+          req.flash("error", "You need to be the campground creator to edit or delete.");
           res.redirect("back");
         }
       }
     });
   } else {
     // If not, redirect
+    req.flash("error", "You need to be logged in to submit.");
     res.redirect("back");
   }
 };
@@ -43,6 +48,7 @@ middlewareObj.checkCommentOwnership = (req, res, next) => {
     Comment.findById(req.params.comment_id, (err, foundComment) => {
       if (err) {
         // check for & handle any query error
+        req.flash("error", "Well, this is awkward. We cannot find that comment. :/");
         res.redirect("back");
       } else {
         // is user the creator of this comment?
@@ -50,12 +56,14 @@ middlewareObj.checkCommentOwnership = (req, res, next) => {
           next();
         } else {
           // if not, redirect back
+          req.flash("error", "You need to be the comment creator to edit or delete.");
           res.redirect("back");
         }
       }
     });
   } else {
     // If not, redirect back
+    req.flash("error", "You need to be logged in to submit.");
     res.redirect("back");
   }
 };

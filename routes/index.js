@@ -26,9 +26,11 @@ router.post("/register", (req, res) => {
   User.register(newUser, req.body.password, (err, user) => {
     if (err) {
       console.log(err);
-      return res.render("register"); // if error, exit registration and re-display the register template
+      req.flash("error", err.message);
+      return res.redirect("/register"); // if error, exit registration and re-display the register template
     }
     passport.authenticate("local")(req, res, () => {
+      req.flash("success", "Welcome to CampWI, " + user.username);
       res.redirect("/campgrounds");
     });
   });
@@ -52,15 +54,8 @@ router.post(
 // LOGOUT Route
 router.get("/logout", (req, res) => {
   req.logout();
+  req.flash("success", "Successfully logged out!");
   res.redirect("/campgrounds");
 });
-
-// Middleware function for logged-in
-function isLoggedIn(req, res, next) {
-  if (req.isAuthenticated()) {
-    return next();
-  }
-  res.redirect("/login");
-}
 
 module.exports = router;

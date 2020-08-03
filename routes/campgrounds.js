@@ -66,6 +66,10 @@ router.get("/:id", (req, res) => {
 // EDIT CAMPGROUND ROUTE
 router.get("/:id/edit", middleware.checkCampgroundOwnership, (req, res) => {
   Campground.findById(req.params.id, (err, foundCampground) => {
+    if (err) {
+      req.flash("error", "Uhrmmm, we could not find that campground.");
+      return res.redirect("/campgrounds/" + req.params.id);
+    }
     res.render("campgrounds/edit", { campground: foundCampground });
   });
 });
@@ -98,10 +102,12 @@ router.delete("/:id", middleware.checkCampgroundOwnership, async (req, res) => {
   try {
     let foundCampground = await Campground.findById(req.params.id);
     await foundCampground.remove();
+    req.flash("success", "Campground deleted!");
     res.redirect("/campgrounds");
   } catch (error) {
     console.log(error.message);
-    res.redirect("/campgrounds/" + req.params.id);
+    req.flash("error", "Uhrmmm, we could not find that campground for you to delete.");
+    res.redirect("/campgrounds");
   }
 });
 

@@ -6,6 +6,7 @@ const methodOverride = require("method-override"),
   passport = require("passport"),
   express = require("express"),
   seedDB = require("./seeds"),
+  flash = require("connect-flash"),
   app = express();
 
 // Set up mongoose SCHEMAS & MODELS
@@ -17,6 +18,7 @@ const Campground = require("./models/campground"), // SCHEMA SET-UP: Set up base
 const campgroundRoutes = require("./routes/campgrounds"),
   commentRoutes = require("./routes/comments"),
   indexRoutes = require("./routes/index");
+const { resolveInclude } = require("ejs");
 
 // Connect (or create new DB) for mongoose to interact with MongoDB
 mongoose
@@ -37,6 +39,7 @@ app.set("view engine", "ejs");
 // serve the "public" folder which contains our custom CSS
 app.use(express.static(__dirname + "/public"));
 app.use(methodOverride("_method"));
+app.use(flash());
 
 // Seed the database AFTER app configuration
 seedDB();
@@ -61,6 +64,8 @@ passport.deserializeUser(User.deserializeUser()); // another method 'tacked-on' 
 
 app.use((req, res, next) => {
   res.locals.currentUser = req.user; // makes "currentUser" available & defined for each template
+  res.locals.success = req.flash("success");
+  res.locals.error = req.flash("error");
   next();
 });
 

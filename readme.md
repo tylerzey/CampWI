@@ -141,3 +141,10 @@
 - User can only delete their own comments
 - Hide/Show edit and delete buttons
 - Refactor Middleware
+
+## Adding in Flash Messages/Alerts
+
+- To display instructions once to a user
+- Demo working version
+- Install and configure connect-flash
+- Add bootstrap alerts to header
