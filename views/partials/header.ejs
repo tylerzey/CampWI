@@ -3,33 +3,59 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@400;700&display=swap&Lusitana:wght@400;700&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@400;700&display=swap"
         rel="stylesheet">
     <!-- Minified Bootstrap v 3.3.7 -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css -->
+    <!-- Font Awesome 6 Core CSS -->
+    <link rel="stylesheet" href="/css/css/fontawesome.css">
+    <!-- Font Awesome 6 Solid Icons -->
+    <link rel="stylesheet" href="/css/css/solid.css">
     <!-- Personal CSS File -->
     <link rel="stylesheet" href="/stylesheets/main.css">
+    <!-- Make site responsive on mobile/tablet -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CampWI</title>
 </head>
 
 <body>
 
-    <nav class="navbar navbar-default">
-        <div class="container-fluid">
+    <!-- Navbar -->
+    <nav class="navbar navbar-default navbar-fixed-top" id="mainNavbar">
+        <div class="container">
             <div class="navbar-header">
-                <a href="/" class="navbar-brand">CampWI</a>
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+
+                <a id="navbar-brand" class="navbar-brand" href="/">CampWI <i class="fas fa-tree"></i></a>
             </div>
-            <div class="collapse navbar-collapse">
-                <ul class="nav navbar-nav navbar-right">
+            <div id="navbar" class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li class="nav-item <%= typeof page !== 'undefined' && page === 'campgrounds' ? 'active' : '' %>"><a
+                            href="/campgrounds"><i class="fas fa-campground"></i> All Campgrounds</a></li>
+                </ul>
+                <ul id='navbar-right' class="nav navbar-nav navbar-right">
                     <% if(!currentUser){ %>
-                    <li><a href="/login">Login</a></li>
-                    <li><a href="/register">Sign Up</a></li>
-                    <% }else{ %>
-                    <li><a href="#">Signed in as <%= currentUser.username %></a></li>
-                    <li><a href="/logout">Logout</a></li>
+                    <li class="nav-item <%= typeof page !== 'undefined' && page === 'login' ? 'active' : '' %>"><a
+                            href="/login"><i class="fas fa-user-secret"></i></i> Howdy, stranger. LOGIN HERE!</a>
+                    </li>
+                    <li class="nav-item <%= typeof page !== 'undefined' && page === 'register' ? 'active' : '' %>"><a
+                            href="/register">Sign Up <i class="fas fa-user-plus"></i></a></li>
+                    <% } else { %>
+                    <li class="nav-item"><a href="#"><i class="fas fa-user"></i> Signed In As
+                            <%= currentUser.username %>
+                            <% if (currentUser && currentUser.isAdmin) { %>
+                            (Admin)
+                            <% } %>
+                        </a>
+                    </li>
+                    <li class="nav-item"><a href="/logout"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
                     <% } %>
                 </ul>
             </div>
@@ -53,17 +79,3 @@
         </div>
     </div>
     <% } %>
-
-
-    <!-- <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
-        <strong class="font-bold">Aww shucks...</strong>
-        <span class="block sm:inline"> please login and try again!</span>
-        <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
-            <svg class="fill-current h-6 w-6 text-red-500" role="button" xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 20 20">
-                <title>Close</title>
-                <path
-                    d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z" />
-            </svg>
-        </span>
-    </div>to render any possible flash message -->

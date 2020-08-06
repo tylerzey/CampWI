@@ -5,6 +5,10 @@ const Campground = require("../models/campground"),
 // All required middleware
 const middlewareObj = {};
 
+middlewareObj.escapeRegex = (text) => {
+  return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+};
+
 middlewareObj.isLoggedIn = (req, res, next) => {
   if (req.isAuthenticated()) {
     return next();
@@ -25,7 +29,7 @@ middlewareObj.checkCampgroundOwnership = (req, res, next) => {
         res.redirect("back");
       } else {
         // is user the creator of this campground?
-        if (foundCampground.author.id.equals(req.user._id)) {
+        if (foundCampground.author.id.equals(req.user._id) || req.user.isAdmin) {
           next();
         } else {
           // if not, redirect
@@ -52,7 +56,7 @@ middlewareObj.checkCommentOwnership = (req, res, next) => {
         res.redirect("back");
       } else {
         // is user the creator of this comment?
-        if (foundComment.author.id.equals(req.user._id)) {
+        if (foundComment.author.id.equals(req.user._id) || req.user.isAdmin) {
           next();
         } else {
           // if not, redirect back
@@ -69,3 +73,15 @@ middlewareObj.checkCommentOwnership = (req, res, next) => {
 };
 
 module.exports = middlewareObj;
+
+// middlewareObj.pickRandomPhoto = () => {
+//   let bgPhotos = [
+//     "/bg_photos/forest_tent_glow_night_camping.jpg",
+//     "/bg_photos/james-wheeler-7x092PMauCg-unsplash.jpg",
+//     "/bg_photos/michael-guite-1o41Wy3Z3kc-unsplash.jpg",
+//     "/bg_photos/scott-goodwill-y8Ngwq34_Ak-unsplash.jpg",
+//     "/bg_photos/tim-foster-jbBR9jbKzwY-unsplash.jpg",
+//   ];
+//   let random = Math.floor(Math.random() * 5);
+//   return bgPhotos[random];
+// };

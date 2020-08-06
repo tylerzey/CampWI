@@ -10,27 +10,60 @@ const Campground = require("../models/campground"),
 //===================
 // INDEX - show all campgrounds
 router.get("/", (req, res) => {
-  // Get all campgrounds from DB
-  Campground.find({}, (err, allCampgrounds) => {
-    if (err) {
-      console.log(err);
-    } else {
-      res.render("./campgrounds/index", { campgrounds: allCampgrounds });
-    }
-  });
+  let noMatch = null;
+  if (req.query.search) {
+    let search = true;
+    // If there's a query, run a MongoDB search with that query data
+    const regex = new RegExp(middleware.escapeRegex(req.query.search), "gi");
+    // Get all campgrounds from DB matching the REGEX
+    Campground.find(
+      { $or: [{ name: regex }, { location: regex }, { "author.username": regex }] },
+      (err, allCampgrounds) => {
+        if (err) {
+          console.log(err);
+        } else {
+          if (allCampgrounds.length < 1) {
+            noMatch = "No campgrounds match that search, please try again.";
+          }
+          res.render("./campgrounds/index", {
+            campgrounds: allCampgrounds,
+            page: "campgrounds",
+            noMatch: noMatch,
+            search: search,
+          });
+        }
+      }
+    );
+  } else {
+    let search = false;
+    // Get all campgrounds from DB
+    Campground.find({}, (err, allCampgrounds) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.render("./campgrounds/index", {
+          campgrounds: allCampgrounds,
+          page: "campgrounds",
+          noMatch: noMatch,
+          search: search,
+        });
+      }
+    });
+  }
 });
 
 // CREATE - add new campground to DB
 router.post("/", middleware.isLoggedIn, (req, res) => {
   // get data from form and add to campgrounds array
   let name = req.body.name;
+  let price = req.body.price;
   let img = req.body.image;
   let desc = req.body.description;
   let author = {
     id: req.user._id,
     username: req.user.username,
   };
-  let newCampground = { name: name, image: img, author: author, description: desc };
+  let newCampground = { name: name, price: price, image: img, author: author, description: desc };
   // Create a new campground and save to DB
   Campground.create(newCampground, (err, newlyCreated) => {
     if (err) {

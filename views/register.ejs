@@ -1,11 +1,46 @@
 <%- include("./partials/header") %>
 
-<h1>Sign Up!</h1>
-
-<form action="/register" method="POST">
-    <input type="text" name="username" id="" placeholder="username">
-    <input type="password" name="password" id="" placeholder="password">
-    <button>Sign Up!</button>
-</form>
+<div class="row">
+    <div class="container">
+        <h1 class="text-center register-header">Sign Up!</h1>
+        <div class="container register-container">
+            <form action="/register" method="POST">
+                <div class="form-group">
+                    <input class="form-control" type="text" name="username" placeholder="Username*"
+                        aria-label="username" required>
+                </div>
+                <div class="form-group">
+                    <input class="form-control" type="password" name="password" placeholder="Password*"
+                        aria-label="password" required>
+                </div>
+                <div class="form-group">
+                    <input class="form-control" type="text" name="firstName" placeholder="First Name"
+                        aria-label="firstName">
+                </div>
+                <div class="form-group">
+                    <input class="form-control" type="text" name="lastName" placeholder="Last Name"
+                        aria-label="lastName">
+                </div>
+                <div class="form-group">
+                    <input class="form-control" type="email" name="email" placeholder="campWI@email.com"
+                        aria-label="email">
+                </div>
+                <div class="form-group">
+                    <input class="form-control" type="text" name="avatar" placeholder="Avatar Image URL"
+                        aria-label="avatar">
+                </div>
+                <div class="form-group">
+                    <input class="form-control" type="text" name="adminCode" placeholder="Admin Code (optional)"
+                        aria-label="adminCode">
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-lg btn-block">Register <i class="fas fa-check"></i></button>
+                </div>
+            </form>
+            <button class="btn btn-xs"><a href="/campgrounds"><i class="fas fa-hand-point-left"></i> Back to all
+                    Campgrounds</a></button>
+        </div>
+    </div>
+</div>
 
 <%- include("./partials/footer") %>

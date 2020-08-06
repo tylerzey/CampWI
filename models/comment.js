@@ -8,6 +8,7 @@ const commentSchema = new mongoose.Schema({
     },
     username: String,
   },
+  createdAt: { type: Date, default: Date.now },
   text: String,
 });
 // Export object model to main file

@@ -17,12 +17,15 @@ router.get("/", (req, res) => {
 
 // Show register form
 router.get("/register", (req, res) => {
-  res.render("register");
+  res.render("register", { page: "register" });
 });
 
 // Handle sign up logic
 router.post("/register", (req, res) => {
   let newUser = new User({ username: req.body.username });
+  if (req.body.adminCode === "guardianOfRum") {
+    newUser.isAdmin = true;
+  }
   User.register(newUser, req.body.password, (err, user) => {
     if (err) {
       console.log(err);
@@ -38,7 +41,7 @@ router.post("/register", (req, res) => {
 
 // Show login form
 router.get("/login", (req, res) => {
-  res.render("login");
+  res.render("login", { page: "login" });
 });
 
 // Handling Login logic

@@ -2,6 +2,7 @@
 const methodOverride = require("method-override"),
   LocalStrategy = require("passport-local"),
   bodyParser = require("body-parser"),
+  middleware = require("./middleware"),
   mongoose = require("mongoose"),
   passport = require("passport"),
   express = require("express"),
@@ -38,6 +39,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
 // serve the "public" folder which contains our custom CSS
 app.use(express.static(__dirname + "/public"));
+app.use(express.static(__dirname + "/public/bg_photos"));
+app.locals.moment = require("moment");
 app.use(methodOverride("_method"));
 app.use(flash());
 
@@ -63,6 +66,7 @@ passport.serializeUser(User.serializeUser()); // another method 'tacked-on' from
 passport.deserializeUser(User.deserializeUser()); // another method 'tacked-on' from "passportLocalMongoose"
 
 app.use((req, res, next) => {
+  // res.locals.bgPhoto = middleware.pickRandomPhoto();
   res.locals.currentUser = req.user; // makes "currentUser" available & defined for each template
   res.locals.success = req.flash("success");
   res.locals.error = req.flash("error");

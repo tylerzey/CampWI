@@ -1,0 +1,104 @@
+body {
+  background-color: #000;
+  font-family: Poppins, Verdana, Arial, sans-serif;
+  font-weight: normal;
+}
+
+#landing-header {
+  z-index: 1;
+  position: relative;
+  text-align: center;
+  padding-top: 40vh;
+}
+
+#landing-header h1 {
+  color: rgba(240, 235, 210, 1);
+  text-shadow: rgba(0, 125, 197, 1) -5px 5px 15px;
+  -webkit-text-stroke: rgba(0, 71, 27, 1) 2px;
+  font-size: 5em;
+  font-weight: 700;
+}
+
+.btn.btn-link {
+  background-color: rgba(0, 71, 27, 1); /*#185230;*/
+  color: rgba(240, 235, 210, 1);
+  border-radius: 15px;
+  text-shadow: rgba(0, 125, 197, 1) -3px 3px 5px;
+}
+
+a {
+  outline: none;
+  text-decoration: none;
+}
+
+/* ========================================================= */
+/*          SLIDE SHOW ANIMATION BELOW                       */
+/* ========================================================= */
+
+.slideshow {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 0; /* ensures background imgs are behind all text & button(s) */
+  list-style: none; /* removes the bullet points */
+  margin: 0;
+  padding: 0;
+}
+
+.slideshow li {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-size: cover;
+  background-position: 50% 50%; /* centers imgs on page */
+  background-repeat: no-repeat; /* ensures imgs don't repeat vertically or horizontally */
+  opacity: 0;
+  z-index: 0;
+  animation: imageAnimation 50s linear infinite; /* loops infinitely for slideshow to never end */
+}
+
+.slideshow li:nth-child(1) {
+  background-image: url("../bg_photos/12-foot-falls.jpg");
+}
+.slideshow li:nth-child(2) {
+  background-image: url("../bg_photos/apostle-islands-wisconsin.jpg");
+  animation-delay: 10s;
+}
+.slideshow li:nth-child(3) {
+  background-image: url("../bg_photos/ice_age_trail_dells_of_the_eau_claire.jpg");
+  animation-delay: 20s;
+}
+.slideshow li:nth-child(4) {
+  background-image: url("../bg_photos/cave-point-county-park-door-county-wisconsin-lake-michigan.jpg");
+  animation-delay: 30s;
+}
+.slideshow li:nth-child(5) {
+  background-image: url("../bg_photos/Devils_Lake_State_Park_Wisconsin.jpg");
+  animation-delay: 40s;
+}
+
+@keyframes imageAnimation {
+  0% {
+    opacity: 0;
+    animation-timing-function: ease-in;
+  }
+  10% {
+    opacity: 1;
+    animation-timing-function: ease-out;
+  }
+  20% {
+    opacity: 1;
+  }
+  30% {
+    opacity: 0;
+  }
+}
+
+/* Older browser support - .no-cssanimations class added by modernizr */
+.no-cssanimations .slideshow li {
+  opacity: 1;
+}

@@ -1,24 +1,444 @@
 body {
-  font-family: Poppins, sans-serif;
+  font-family: Poppins, Verdana, Arial, sans-serif;
+  /* background-image: url("https://images.unsplash.com/photo-1534274169235-d8d4447599d3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80")
+    no-repeat center center fixed; */
+  padding-top: 50px;
+  color: rgba(0, 71, 27, 1);
+  background: rgba(240, 235, 210, 1);
+
+  /* Possible 2nd gradient option "Forest" */
+  /* background: #5a3f37; 
+  background: -webkit-linear-gradient(to right, #2c7744, #5a3f37); 
+  background: linear-gradient(
+    to right,
+    #2c7744,
+    #5a3f37
+  ); W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+  /* Possible 3rd gradient option "Moss" */
+  /* background: #134e5e; fallback for old browsers
+  background: -webkit-linear-gradient(to right, #71b280, #134e5e); Chrome 10-25, Safari 5.1-6
+  background: linear-gradient(
+    to right,
+    #71b280,
+    #134e5e
+  ); W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
-.thumbnail img {
-  width: 100%;
+.container-fluid.campgrounds-index-header-section {
+  /* "Under the Lake" CSS Gradient design from "uigradients.com" */
+  background: #093028; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #237a57, #093028); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #237a57,
+    #093028
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
+
+#jumbotron {
+  margin-bottom: 10px;
+  background: none;
+  color: rgba(240, 235, 210, 1);
+  text-shadow: rgba(0, 125, 197, 1) 0px 0px 30px;
+}
+
+#jumbotron form.form-inline > .form-group > .form-control {
+  background: rgba(240, 235, 210, 1);
+  color: rgba(0, 71, 27, 1);
+  font-weight: 500;
+  border: none;
+  width: 325px;
+  line-height: 3;
+}
+
+.row.align-items-center .container > .row.col-md-12.text-center {
+  padding-top: 10px;
+  margin: 0 auto;
+  background-color: rgba(240, 235, 210, 1);
+  color: rgba(0, 71, 27, 1);
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+}
+
+/* ============================================ */
+/*      INDEX PAGE THUMBNAIL STYLING            */
+/* ============================================ */
 
 .thumbnail {
   padding: 0;
+  text-align: center;
+  /* "Under the Lake" CSS Gradient design from "uigradients.com" */
+  background: #093028; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #237a57, #093028); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #237a57, #093028);
 }
 
-.col-lg-12 h3 {
+.thumbnail > .caption > h4 {
+  color: rgba(240, 235, 210, 1);
+  font-size: 2.4rem;
   font-family: Bebas Neue, sans-serif;
+  -webkit-text-stroke: rgba(0, 125, 197, 1) 0.4px;
 }
 
-.thumbnail .caption h4 {
+.thumbnail > p > a.btn {
+  text-decoration: none;
+  background: rgba(240, 235, 210, 1);
+  color: rgba(0, 71, 27, 1);
+}
+
+.thumbnail > p > a.btn:hover {
+  text-decoration: none;
+  background: rgba(0, 125, 197, 1);
+  color: rgba(240, 235, 210, 1);
+}
+
+.thumbnail > .img-responsive {
+  width: 100%;
+  padding: 0;
+  background-size: cover;
+  background-position: 50% 50%;
+}
+
+.container > .row.col-md-12.text-center {
   font-family: Bebas Neue, sans-serif;
+  font-size: 2.5em;
 }
 
-#delete-form {
+.flex-row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: -15px;
+  margin-right: 15px;
+  width: 100%;
+}
+
+.flex-child {
+  flex: 0 1 auto;
+  width: 100%;
+  padding: 15px;
+}
+.flex-child .thumbnail {
+  height: 100%;
+}
+@media screen and (min-width: 768px) {
+  .flex-child {
+    width: 33.333%;
+  }
+}
+@media screen and (min-width: 1024px) {
+  .flex-child {
+    width: 25%;
+  }
+}
+
+.btn {
+  background-color: rgba(240, 235, 210, 1);
+  color: rgba(0, 71, 27, 1);
+  border: none;
+  font-weight: 500;
+}
+
+.btn:hover {
+  background-color: rgba(0, 71, 27, 1);
+  color: rgba(240, 235, 210, 1);
+  border: none;
+}
+
+/* ======================================================== */
+/*                     NAVBAR STYLING                       */
+/* ======================================================== */
+
+/* ++++++++++++++++++++++++++++ */
+/* UNSCROLLED NAVBAR STYLING  */
+/* ++++++++++++++++++++++++++++ */
+
+/* Navbar Brand UNSCROLLED STYLING */
+.navbar > .container .navbar-brand {
+  background: rgba(240, 235, 210, 1);
+  color: rgba(0, 71, 27, 1);
+  font-size: 2.5rem;
+  transition: background 500ms;
+  text-shadow: rgba(0, 125, 197, 1) 0px 0px 2px;
+}
+
+/* Navbar UNSCROLLED STYLING */
+.navbar.navbar-default.navbar-fixed-top {
+  background: rgba(240, 235, 210, 1);
+  color: rgba(0, 71, 27, 1);
+  font-size: 1.5rem;
+  font-weight: 400;
+  top: 0;
+  border-color: rgba(0, 125, 197, 1);
+  transition: background 500ms;
+  text-shadow: rgba(0, 125, 197, 1) 0px 0px 2px;
+}
+
+.navbar a:hover,
+.navbar > .container .navbar-brand:hover {
+  background-color: rgba(0, 71, 27, 1);
+  opacity: 0.85;
+  color: rgba(240, 235, 210, 1);
+  transition: background 500ms;
+  -webkit-text-stroke: rgba(0, 125, 197, 1) 0.4px;
+}
+
+/* Active Navbar link styling */
+.navbar-default .navbar-nav > .active > a {
+  background: rgba(0, 71, 27, 0.8);
+  color: rgba(240, 235, 210, 1);
+  transition: background 500ms;
+  -webkit-text-stroke: rgba(0, 125, 197, 1) 0.4px;
+}
+
+.navbar-default .navbar-nav > .active > a:hover {
+  background: rgba(240, 235, 210, 1);
+  color: rgba(0, 71, 27, 0.85);
+  transition: background 500ms;
+  -webkit-text-stroke: rgba(0, 125, 197, 1) 0.4px;
+}
+
+/* Navbar-Rightside styling */
+.navbar-default .navbar-nav > li > a {
+  background: rgba(240, 235, 210, 1);
+  color: rgba(0, 71, 27, 1);
+  transition: background 500ms;
+  text-shadow: rgba(0, 125, 197, 1) 0px 0px 2px;
+}
+
+.navbar-default .navbar-nav > li > a:hover {
+  background: rgba(0, 71, 27, 0.85);
+  color: rgba(240, 235, 210, 1);
+  transition: background 500ms;
+  -webkit-text-stroke: rgba(0, 125, 197, 1) 0.4px;
+}
+
+/* ++++++++++++++++++++++++++++ */
+/*    SCROLLED NAVBAR STYLING   */
+/* ++++++++++++++++++++++++++++ */
+
+/* Navbar Brand SCROLLED STYLING */
+.navbar.scrolled > .container .navbar-brand {
+  background: rgba(0, 71, 27, 1);
+  color: rgba(240, 235, 210, 1);
+  font-size: 2.5rem;
+  transition: background 500ms;
+  -webkit-text-stroke: rgba(0, 125, 197, 1) 0.4px;
+}
+
+/* Navbar SCROLLED STYLING */
+.navbar.navbar-default.navbar-fixed-top.scrolled {
+  background: rgba(0, 71, 27, 1);
+  color: rgba(240, 235, 210, 1);
+  font-size: 1.5rem;
+  font-weight: 400;
+  top: 0;
+  border-color: rgba(0, 125, 197, 1);
+  transition: background 500ms;
+  -webkit-text-stroke: rgba(0, 125, 197, 1) 0.4px;
+}
+
+.navbar.scrolled a:hover,
+.navbar.scrolled > .container .navbar-brand:hover {
+  background-color: rgba(240, 235, 210, 1);
+  opacity: 0.85;
+  color: rgba(0, 71, 27, 1);
+  transition: background 500ms;
+  text-shadow: rgba(0, 125, 197, 1) 0px 0px 2px;
+}
+
+/* Active Navbar link styling */
+.navbar-default.scrolled .navbar-nav > .active > a {
+  background: rgba(240, 235, 210, 1);
+  color: rgba(0, 71, 27, 0.8);
+  transition: background 500ms;
+  text-shadow: rgba(0, 125, 197, 1) 0px 0px 2px;
+}
+
+.navbar-default.scrolled .navbar-nav > .active > a:hover {
+  background: rgba(0, 71, 27, 0.85);
+  color: rgba(240, 235, 210, 1);
+  transition: background 500ms;
+  -webkit-text-stroke: rgba(0, 125, 197, 1) 0.4px;
+}
+
+/* Navbar-Rightside styling */
+.navbar-default.scrolled .navbar-nav > li > a {
+  background: rgba(0, 71, 27, 1);
+  color: rgba(240, 235, 210, 1);
+  transition: background 500ms;
+  -webkit-text-stroke: rgba(0, 125, 197, 1) 0.4px;
+}
+
+.navbar-default.scrolled .navbar-nav > li > a:hover {
+  background: rgba(240, 235, 210, 1);
+  color: rgba(0, 71, 27, 0.85);
+  transition: background 500ms;
+  text-shadow: rgba(0, 125, 197, 1) 0px 0px 2px;
+}
+
+/* ======================================================== */
+/*              END OF NAVBAR STYLING                       */
+/* ======================================================== */
+
+/* ======================================================== */
+/*        FLASH MESSAGE PAGE LOCATION & COLORS              */
+/* ======================================================== */
+
+.container > .alert.alert-success,
+.container > .alert.alert-danger {
+  background-color: rgba(0, 125, 197, 1);
+  color: rgba(0, 71, 27, 1);
+  text-align: center;
+  justify-content: center;
+}
+
+/* ======================================================== */
+/*           LOGIN & REGISTRATION PAGE STYLING              */
+/* ======================================================== */
+
+.login-header,
+.register-header {
+  font-size: 2.5em;
+  font-weight: 700;
+}
+
+.login-container,
+.register-container {
+  max-width: 35%;
+  margin: 25px auto;
+}
+
+.login-container .btn,
+.register-container .btn,
+.login-container .btn > a,
+.register-container .btn > a {
+  background: rgba(0, 71, 27, 1);
+  color: rgba(240, 235, 210, 1);
+}
+
+.login-container .btn:hover,
+.register-container .btn:hover {
+  background: rgba(0, 71, 27, 0.75);
+  color: rgba(240, 235, 210, 1);
+}
+
+.login-container a:hover,
+.register-container a:hover {
+  /* need the anchor tag background inside a button to be transparent when hovered over */
+  background-color: transparent;
+}
+
+/* ======================================================== */
+/*   CAMPGROUND & COMMENT EDIT AND DELETE BUTTON STYLING    */
+/* ======================================================== */
+
+.campground-edit-delete-btns > .btn-warning,
+.comment-edit-delete-btns > .btn-warning,
+.campground-edit-delete-btns > .btn-warning > a,
+.comment-edit-delete-btns > .btn-warning > a {
+  opacity: 0;
+  color: rgba(240, 235, 210, 1);
+  background-color: #f0ad4e;
+  border-color: #eea236;
+  transition: 0.08s linear;
+  -webkit-transition: 0.08s linear;
+  -moz-transition: 0.08s linear;
+  -ms-transition: 0.08s linear;
+  -o-transition: 0.08s linear;
+}
+
+.campground-edit-delete-btns > .delete-campground-form > .btn-danger,
+.comment-edit-delete-btns > .delete-comment-form > .btn-danger {
+  opacity: 0;
+  color: rgba(240, 235, 210, 1);
+  background-color: #d9534f;
+  border-color: #d43f3a;
+  transition: 0.08s linear;
+  -webkit-transition: 0.08s linear;
+  -moz-transition: 0.08s linear;
+  -ms-transition: 0.08s linear;
+  -o-transition: 0.08s linear;
+}
+
+.campground-edit-delete-btns > .btn-warning:hover,
+.comment-edit-delete-btns > .btn-warning:hover {
+  opacity: 1;
+  color: rgba(240, 235, 210, 1);
+  background-color: #ec971f;
+  border-color: #d58512;
+  text-decoration: none;
+  transition: 0.08s linear;
+  -webkit-transition: 0.08s linear;
+  -moz-transition: 0.08s linear;
+  -ms-transition: 0.08s linear;
+  -o-transition: 0.08s linear;
+}
+
+.campground-edit-delete-btns > .delete-campground-form > .btn-danger:hover,
+.comment-edit-delete-btns > .delete-comment-form > .btn-danger:hover {
+  opacity: 1;
+  color: rgba(240, 235, 210, 1);
+  background-color: #d9534f;
+  border-color: #d43f3a;
+  text-decoration: none;
+  transition: 0.08s linear;
+  -webkit-transition: 0.08s linear;
+  -moz-transition: 0.08s linear;
+  -ms-transition: 0.08s linear;
+  -o-transition: 0.08s linear;
+}
+
+.campground-edit-delete-btns a:hover,
+.comment-edit-delete-btns a:hover {
+  /* need the anchor tag background inside a button to be transparent when hovered over */
+  background-color: transparent;
+  opacity: 1;
+  color: rgba(240, 235, 210, 1);
+  text-decoration: none;
+}
+
+/* ======================================================== */
+/*      CAMPGROUND SHOW, CREATE, & EDIT PAGE STYLING        */
+/* ======================================================== */
+
+.container-fluid.show-page-top {
+  padding-top: 50px;
+  /* "Under the Lake" CSS Gradient design from "uigradients.com" */
+  background: #093028; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #237a57, #093028); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #237a57, #093028);
+}
+
+.show-page-first-row .thumbnail {
+  padding: 0;
+  text-align: left;
+  background: rgba(240, 235, 210, 1);
+  color: rgba(0, 71, 27, 1);
+  font-weight: 600;
+  -webkit-text-stroke: none;
+}
+
+.show-page-first-row .thumbnail > .caption > h4 {
+  color: rgba(0, 71, 27, 1);
+  text-align: center;
+  font-size: 2.4rem;
+  font-family: Bebas Neue, sans-serif;
+  text-shadow: rgba(0, 125, 197, 1) 0px 0px 2px;
+}
+
+.show-page-first-row .well {
+  background: rgba(240, 235, 210, 1);
+  color: rgba(0, 71, 27, 1);
+}
+
+.show-page-first-row .well > hr {
+  border-top: 1.5px solid rgba(0, 71, 27, 1);
+  border-bottom: 0.1px solid rgba(0, 125, 197, 1);
+  border-left: 0.1px solid rgba(0, 125, 197, 1);
+}
+
+.delete-campground-form {
   display: inline;
 }
 
@@ -26,44 +446,29 @@ body {
   display: inline;
 }
 
-div.comment-edit-delete-btns a {
-  opacity: 0;
+.panel-body > .list-group > li.list-group-item {
+  background: rgba(240, 235, 210, 1);
+  color: rgba(0, 71, 27, 1);
+  font-weight: 600;
 }
 
-div.comment-edit-delete-btns a:hover {
-  opacity: 1;
-  transition: 0.3s linear;
-  -webkit-transition: 0.3s linear;
-  -moz-transition: 0.3s linear;
-  -ms-transition: 0.3s linear;
-  -o-transition: 0.3s linear;
-}
-
-div.comment-edit-delete-btns .delete-comment-form button {
-  opacity: 0;
-}
-
-div.comment-edit-delete-btns .delete-comment-form button:hover {
-  opacity: 1;
-  transition: 0.3s linear;
-  -webkit-transition: 0.3s linear;
-  -moz-transition: 0.3s linear;
-  -ms-transition: 0.3s linear;
-  -o-transition: 0.3s linear;
+.panel-body > .list-group > li.list-group-item.active {
+  background-color: rgba(0, 125, 197, 1);
 }
 
 div.col-md-9 div.thumbnail div.caption h4.pull-right + h4 {
-  color: #337ab7;
+  font-size: 2.5rem;
+  color: rgba(0, 71, 27, 0.75);
 }
 
-.lead {
+.show-page-first-row .lead {
+  font-size: 4rem;
+  font-weight: 700;
+  color: rgba(240, 235, 210, 1);
   margin-bottom: 10px;
+  -webkit-text-stroke: rgba(0, 125, 197, 1) 0.4px;
 }
 
 div.panel-body {
   padding: 0 10px;
-}
-
-div.list-group {
-  margin-bottom: 10px;
 }
